@@ -17,7 +17,7 @@ export default function UploadPage() {
 
   const handleFileChange = (type, e) => {
     const file = e.target.files?.[0]
-    console.log(`📁 File selected for ${type}:`, file?.name, file?.size)
+    console.log(`📝 File selected for ${type}:`, file?.name, file?.size)
     if (file) {
       setFiles(prev => {
         const updated = { ...prev, [type]: file }
@@ -141,13 +141,13 @@ export default function UploadPage() {
           )}
         </div>
 
-        {/* Upload Button */}
+        {/* Upload Button - FIXED: Now enabled if ANY file is selected */}
         <button
           onClick={handleUpload}
-          disabled={uploading || !files.npl || !files.kol2 || !files.realisasi}
+          disabled={uploading || !hasFiles}
           className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
         >
-          {uploading ? '⏳ Uploading...' : '📤 Upload All Files & Replace'}
+          {uploading ? '⏳ Uploading...' : '📤 Upload Selected Files & Replace'}
         </button>
 
         {/* Error Message */}
